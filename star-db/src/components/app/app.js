@@ -10,7 +10,7 @@ import PersonDetails from '../person-details';
 
 const  App = () => {
     return(
-        <div>
+        <div className="container">
             <Header />
             <RandomPlanet />
 
