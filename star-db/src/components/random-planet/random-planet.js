@@ -5,6 +5,7 @@ import SwapiService from '../../services/swapi-service';
 
 import './random-planet.css';
 import ErrorIndicator from "../error-indicator";
+import ImageComponent from "../image-component";
 
 export default class RandomPlanet extends Component {
 
@@ -18,7 +19,7 @@ export default class RandomPlanet extends Component {
 
     componentDidMount() {
         this.updatePlanet();
-        this.interval = setInterval(this.updatePlanet, 3000);
+        this.interval = setInterval(this.updatePlanet, 5000);
     }
 
     componentWillUnmount() {
@@ -43,11 +44,13 @@ export default class RandomPlanet extends Component {
 
     updatePlanet = () => {
         const id = Math.floor(Math.random()*25) + 3;
+
         this.swapiService
             .getPlanet(id)
             .then(this.onPlanetLoaded)
             .catch(this.onError);
     };
+
 
     render() {
         const { planet, loading, error } = this.state;
@@ -72,12 +75,15 @@ const PlanetView = ({ planet }) => {
     const { id, name, population,
         rotationPeriod, diameter } = planet;
 
+
     return (
         <React.Fragment>
-            <img className="planet-image"
-                 alt="img"
-                 src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
-            <div>
+            {/*<img className="planet-image"*/}
+            {/*     alt="img"*/}
+            {/*     */}
+            {/*     src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />*/}
+            <ImageComponent imageUrl={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}/>
+            <div className="ml-3">
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
