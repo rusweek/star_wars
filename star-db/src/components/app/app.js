@@ -6,25 +6,43 @@ import Header from "../header";
 import RandomPlanet from '../random-planet';
 import ItemList from '../item-list';
 import PersonDetails from '../person-details';
+import ErrorIndicator from "../error-indicator";
+import PeoplePage from "../people-page";
 
 
-const  App = () => {
-    return(
-        <div className="container">
-            <Header />
-            <RandomPlanet />
+export default class App extends React.Component {
 
-            <div className="row mb2">
-                <div className="col-md-6">
-                    <ItemList />
-                </div>
-                <div className="col-md-6">
-                    <PersonDetails />
-                </div>
+    state = {
+        hasError: false
+    };
+
+
+
+    componentDidCatch(error, errorInfo) {
+        this.setState({
+            hasError: true,
+        })
+    }
+
+    render() {
+
+        if(this.state.hasError){
+            return <ErrorIndicator/>
+        }
+        return(
+            <div className="container">
+                <Header />
+                <RandomPlanet />
+
+
+
+                   <PeoplePage />
+
             </div>
-        </div>
-    );
+        );
+    }
+
+
 
 };
 
-export default App;
