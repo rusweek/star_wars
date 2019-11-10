@@ -22,13 +22,15 @@ export default class ItemList extends Component
             })
     }
 
-    renderItem (arr){
-        return arr.map(({id, name}) =>{
+    renderItems(arr){
+        return arr.map((item) =>{
+            const {id} = item;
+            const label = this.props.renderItem(item);
             return(
                 <li className="list-group-item"
                     key={id}
                     onClick={()=> this.props.onItemSelected(id)}>
-                    {name}
+                    {label}
                 </li>
             )
         })
@@ -41,7 +43,7 @@ export default class ItemList extends Component
             return <Spinner/>;
         }
 
-        const items = this.renderItem(ItemList);
+        const items = this.renderItems(ItemList);
         return(
             <ul className="item-list list-group">
                 {items}

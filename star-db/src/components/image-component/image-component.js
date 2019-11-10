@@ -1,6 +1,6 @@
 import React from "react";
 import icon from './death-star.png';
-class ImageComponent extends React.PureComponent {
+class ImageComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,6 +17,12 @@ class ImageComponent extends React.PureComponent {
 
     handleImageError() {
         this.setState({ imageStatus: "failed to load", error: true });
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.imageURL !== this.props.imageUrl  ){
+            return true;
+        }
     }
 
 
