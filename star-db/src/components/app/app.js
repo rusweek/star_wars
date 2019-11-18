@@ -11,6 +11,14 @@ import PeoplePage from "../people-page";
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
 import Row from "../row";
+import {
+    PersonDetails,
+    PlanetDetails,
+    StarshipDetails,
+    PersonList,
+    PlanetList,
+    StarshipList
+    } from '../sw-components'
 
 
 export default class App extends React.Component {
@@ -35,44 +43,20 @@ export default class App extends React.Component {
             return <ErrorIndicator/>
         }
 
-        const personDetails = (
-            <ItemDetails itemId={11}
-                getData={this.swapiService.getPerson}
-                getImagUrl={this.swapiService.getPersonImage}>
-                    <Record field="gender" label="Gender: " />
-                    <Record field="eyeColor" label="Eye color: " />
-                    <Record field="birthYear" label="Birth year: " />
-
-            </ItemDetails>
-        );
-
-        const starshipDetails = (
-            <ItemDetails itemId={5}
-                getData={this.swapiService.getStarship}
-                getImagUrl={this.swapiService.getStarshipImage} >
-                    <Record field="model" label="Model: "/>
-                    <Record field="length" label="Length: "/>
-                    <Record field="manufacturer" label="Manufacturer: "/>
-            </ItemDetails>
-        );
         return(
             <ErrorBoundry>
                 <div className="container">
                     <Header />
                     <RandomPlanet />
-                    <ItemList
-                        onItemSelected = {()=>{}}
-                        getData={this.swapiService.getAllPeople()}
-                        >
-                        {({name})=> `${name}`}
-                    </ItemList>
-                    <ItemList
-                        onItemSelected = {()=>{}}
-                        getData={this.swapiService.getAllPlanets()}
-                        >
-                        {({name})=> `${name}`}
-                    </ItemList>
-                    {/*<PeoplePage />*/}
+
+                    <PersonDetails itemId={11} />
+                    <PlanetDetails itemId={5} />
+                    <StarshipDetails itemId={9} />
+                    
+                    <PersonList />
+                    <StarshipList />
+                    <PlanetList />
+
                     {/*<Row*/}
                     {/*    left={personDetails}*/}
                     {/*    right={starshipDetails}*/}

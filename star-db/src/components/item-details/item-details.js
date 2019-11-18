@@ -1,11 +1,9 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import Spinner from '../spinner';
-import './item-details.css'
-import SwapiService from "../../services/swapi-service";
-import ErrorIndicator from "../error-indicator";
+import './item-details.css';
 
 const Record =({item, field, label})=>{
-    console.log(item);
+
     return(
         <li className="list-group-item">
             <span className="term">{label}</span>
@@ -19,7 +17,7 @@ export {
 };
 
 export default class ItemDetails extends Component {
-    swapiService = new SwapiService();
+
 
     state = {
         item: null,
@@ -76,9 +74,9 @@ export default class ItemDetails extends Component {
 
 
         const { item, image, loading} = this.state;
-        const {id, name, gender, birthYear, eyeColor, } = item;
+        const { name } = item;
         const spinner = loading ? <Spinner /> : null;
-        const content = !loading ? "d-none" : "";
+        // const content = !loading ? "d-none" : "";
 
         return (
 
