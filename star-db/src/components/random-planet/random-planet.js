@@ -6,6 +6,8 @@ import './random-planet.css';
 import ErrorIndicator from "../error-indicator";
 import ImageComponent from "../image-component";
 
+import PropTypes from 'prop-types';
+
 export default class RandomPlanet extends Component {
 
 
@@ -16,8 +18,9 @@ export default class RandomPlanet extends Component {
 
 
     componentDidMount() {
+        const {updateInterval} = this.props;
         this.updatePlanet();
-        this.interval = setInterval(this.updatePlanet, 5000);
+        this.interval = setInterval(this.updatePlanet, updateInterval);
     }
 
     componentWillUnmount() {
@@ -67,7 +70,13 @@ export default class RandomPlanet extends Component {
         );
     }
 }
+RandomPlanet.defaultProps = {
+    updateInterval: 10000
+};
 
+RandomPlanet.propType = {
+    updateInterval: PropTypes.number
+};
 const PlanetView = ({ planet }) => {
 
     const { id, name, population,
