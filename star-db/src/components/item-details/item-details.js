@@ -32,6 +32,8 @@ export default class ItemDetails extends Component {
 
     }
 
+
+
     componentDidUpdate(prevProps) {
 
         if (this.props.itemId !== prevProps.itemId){
@@ -46,6 +48,7 @@ export default class ItemDetails extends Component {
     }
 
     updateItem(){
+
         const { itemId, getData, getImagUrl } = this.props;
         if (!itemId){
             return;
@@ -53,7 +56,6 @@ export default class ItemDetails extends Component {
 
         getData(itemId)
             .then((item) => {
-
                 this.setState({
                     item: item,
                     loading: false,
@@ -61,30 +63,28 @@ export default class ItemDetails extends Component {
 
                 });
 
-            })
+            });
     }
 
 
 
     render() {
-
         if(!this.state.item && !this.state.times){
             return <span>Select a person from the list</span>
         }
 
 
         const { item, image, loading} = this.state;
-        const { name } = item;
+
+
         const spinner = loading ? <Spinner /> : null;
-        // const content = !loading ? "d-none" : "";
-
+        if(loading){
+            return <div className="person-details card"> {spinner}</div>
+        }
+        const { name } = item;
         return (
-
             <div className="person-details card">
-                {spinner}
-
                 <img className="person-image" src={image} alt=""/>
-
                 <div className="card-body">
                     <h4>{name}</h4>
                     <ul className="list-group list-group-flush ">

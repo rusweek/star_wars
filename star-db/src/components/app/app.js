@@ -7,26 +7,17 @@ import RandomPlanet from '../random-planet';
 import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
-import Row from "../row";
 import {SwapiServiceProvider, SwapiServiceConsumer} from "../swapi-service-context";
-import {
-    PersonDetails,
-    PlanetDetails,
-    StarshipDetails,
-    PersonList,
-    PlanetList,
-    StarshipList
-    } from '../sw-components'
+import PlanetPage from "../pages/planets-page";
+import PeoplePage from "../pages/people-page";
+import Starship from "../pages/starships-page";
 
 
 export default class App extends React.Component {
-
     swapiService = new SwapiService();
-
     state = {
         hasError: false
     };
-
 
 
     componentDidCatch(error, errorInfo) {
@@ -36,7 +27,6 @@ export default class App extends React.Component {
     }
 
     render() {
-
         if(this.state.hasError){
             return <ErrorIndicator/>
         }
@@ -52,18 +42,10 @@ export default class App extends React.Component {
                             }}
                         </SwapiServiceConsumer>
 
-                        <PersonDetails itemId={11} />
-                        <PlanetDetails itemId={5} />
-                        <StarshipDetails itemId={9} />
+                        <PeoplePage />
+                        <PlanetPage />
+                        <Starship />
 
-                        <PersonList />
-                        <StarshipList />
-                        <PlanetList />
-
-                        {/*<Row*/}
-                        {/*    left={personDetails}*/}
-                        {/*    right={starshipDetails}*/}
-                        {/*/>*/}
                     </div>
                 </SwapiServiceProvider>
             </ErrorBoundry>

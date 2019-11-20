@@ -1,10 +1,6 @@
 import React from "react";
 import icon from './death-star.png';
 class ImageComponent extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     shouldComponentUpdate(nextProps) {
         if (nextProps.imageURL !== this.props.imageUrl  ){
