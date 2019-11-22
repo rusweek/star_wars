@@ -13,6 +13,7 @@ import PlanetPage from "../pages/planets-page";
 import PeoplePage from "../pages/people-page";
 import StarshipPage from "../pages/starships-page";
 import StarshipDetails from "../sw-components/starship-details";
+import PersonDetails from "../sw-components/person-details"
 
 
 export default class App extends React.Component {
@@ -46,13 +47,18 @@ export default class App extends React.Component {
                             </SwapiServiceConsumer>
 
                             <Route path="/" render={()=><h2>Welcome to Star Wars information blog</h2>} exact/>
+
                             <Route path="/people/:id?" component={PeoplePage}/>
                             <Route path="/planets" component={PlanetPage}/>
                             <Route path="/starships" component={StarshipPage} exact/>
                             <Route path="/starships/:id" render={({match})=>{
-                                console.log(match);
                                 const {id} = match.params;
-                                return <StarshipDetails itemId={id} />
+                                return <StarshipDetails itemId={id} url={match.url} />
+                            }}/>
+
+                            <Route path="/people/more/people/:id" render={({match})=>{
+                                const {id} = match.params;
+                                console.log(match.url);
                             }}/>
 
                         </div>

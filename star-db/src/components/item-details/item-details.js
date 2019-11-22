@@ -75,6 +75,8 @@ export default class ItemDetails extends Component {
 
 
         const { item, image, loading} = this.state;
+        const { url} = this.props;
+
 
 
         const spinner = loading ? <Spinner /> : null;
