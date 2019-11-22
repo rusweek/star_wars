@@ -12,6 +12,7 @@ import {SwapiServiceProvider, SwapiServiceConsumer} from "../swapi-service-conte
 import PlanetPage from "../pages/planets-page";
 import PeoplePage from "../pages/people-page";
 import StarshipPage from "../pages/starships-page";
+import StarshipDetails from "../sw-components/starship-details";
 
 
 export default class App extends React.Component {
@@ -47,7 +48,12 @@ export default class App extends React.Component {
                             <Route path="/" render={()=><h2>Welcome to Star Wars information blog</h2>} exact/>
                             <Route path="/people" component={PeoplePage}/>
                             <Route path="/planets" component={PlanetPage}/>
-                            <Route path="/starships" component={StarshipPage}/>
+                            <Route path="/starships" component={StarshipPage} exact/>
+                            <Route path="/starships/:id" render={({match})=>{
+                                console.log(match);
+                                const {id} = match.params.id;
+                                return <StarshipDetails itemId={id} />
+                            }}/>
 
                         </div>
                     </Router>
