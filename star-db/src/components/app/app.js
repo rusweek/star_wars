@@ -46,12 +46,12 @@ export default class App extends React.Component {
                             </SwapiServiceConsumer>
 
                             <Route path="/" render={()=><h2>Welcome to Star Wars information blog</h2>} exact/>
-                            <Route path="/people" component={PeoplePage}/>
+                            <Route path="/people/:id?" component={PeoplePage}/>
                             <Route path="/planets" component={PlanetPage}/>
                             <Route path="/starships" component={StarshipPage} exact/>
                             <Route path="/starships/:id" render={({match})=>{
                                 console.log(match);
-                                const {id} = match.params.id;
+                                const {id} = match.params;
                                 return <StarshipDetails itemId={id} />
                             }}/>
 
