@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import './app.css'
 
@@ -10,7 +11,7 @@ import ErrorBoundry from "../error-boundry";
 import {SwapiServiceProvider, SwapiServiceConsumer} from "../swapi-service-context";
 import PlanetPage from "../pages/planets-page";
 import PeoplePage from "../pages/people-page";
-import Starship from "../pages/starships-page";
+import StarshipPage from "../pages/starships-page";
 
 
 export default class App extends React.Component {
@@ -34,19 +35,22 @@ export default class App extends React.Component {
         return(
             <ErrorBoundry>
                 <SwapiServiceProvider value={this.swapiService}>
-                    <div className="container">
-                        <Header />
-                        <SwapiServiceConsumer>
-                            {()=>{
-                                return (<RandomPlanet swapiService={this.swapiService}/>)
-                            }}
-                        </SwapiServiceConsumer>
+                    <Router>
+                        <div className="container">
+                            <Header />
+                            <SwapiServiceConsumer>
+                                {()=>{
+                                    return (<RandomPlanet swapiService={this.swapiService}/>)
+                                }}
+                            </SwapiServiceConsumer>
 
-                        <PeoplePage />
-                        <PlanetPage />
-                        <Starship />
+                            <Route path="/" render={()=><h2>Welcome to Star Wars information blog</h2>} exact/>
+                            <Route path="/people" component={PeoplePage}/>
+                            <Route path="/planets" component={PlanetPage}/>
+                            <Route path="/starships" component={StarshipPage}/>
 
-                    </div>
+                        </div>
+                    </Router>
                 </SwapiServiceProvider>
             </ErrorBoundry>
         );

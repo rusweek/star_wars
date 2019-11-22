@@ -16,7 +16,7 @@ class ImageComponent extends React.Component {
     render() {
         return (
             <div >
-                <img style={ {width:'150px', height: '150px', }}
+                <img
                      onError={this.addDefaultSrc} className="img-responsive"
                      src={this.props.imageUrl} alt="img"/>
             </div>

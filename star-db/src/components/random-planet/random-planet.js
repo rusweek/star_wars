@@ -89,7 +89,7 @@ const PlanetView = ({ planet }) => {
             {/*     alt="img"*/}
             {/*     */}
             {/*     src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />*/}
-            <ImageComponent imageUrl={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}/>
+            <ImageComponent classNmae="random-planet" imageUrl={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
             <div className="ml-3">
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
