@@ -57,31 +57,33 @@ export default class App extends React.Component {
                                 }}
                             </SwapiServiceConsumer>
 
-                            <Route path="/" render={()=><h2>Welcome to Star Wars information blog</h2>} exact/>
+                            <Switch>
+                                <Route path="/" render={()=><h2>Welcome to Star Wars information blog</h2>} exact/>
 
-                            <Route path="/people/:id?" component={PeoplePage}/>
-                            <Route path="/planets" component={PlanetPage}/>
-                            <Route path="/starships" component={StarshipPage} exact/>
-                            <Route path="/starships/:id" render={({match})=>{
-                                const {id} = match.params;
-                                return <StarshipDetails itemId={id} url={match.url} />
-                            }}/>
+                                <Route path="/people/:id?" component={PeoplePage}/>
+                                <Route path="/planets" component={PlanetPage}/>
+                                <Route path="/starships" component={StarshipPage} exact/>
+                                <Route path="/starships/:id" render={({match})=>{
+                                    const {id} = match.params;
+                                    return <StarshipDetails itemId={id} url={match.url} />
+                                }}/>
 
-                            <Route
-                                path="/login"
-                                render={() => (
-                                    <LoginPage
-                                        isLoggedIn={isLoggedIn}
-                                        onLogin={this.onLogin}/>
-                                )}/>
+                                <Route
+                                    path="/login"
+                                    render={() => (
+                                        <LoginPage
+                                            isLoggedIn={isLoggedIn}
+                                            onLogin={this.onLogin}/>
+                                    )}/>
 
-                            <Route
-                                path="/secret"
-                                render={() => (
-                                    <SecretPage isLoggedIn={isLoggedIn} />
-                                )}/>
+                                <Route
+                                    path="/secret"
+                                    render={() => (
+                                        <SecretPage isLoggedIn={isLoggedIn} />
+                                    )}/>
 
-                            <Route render={() => <h2>Page not found</h2>} />
+                                <Route render={() => <h2>Page not found</h2>} />
+                            </Switch>
 
                         </div>
                     </Router>
