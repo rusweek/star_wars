@@ -13,13 +13,22 @@ import PlanetPage from "../pages/planets-page";
 import PeoplePage from "../pages/people-page";
 import StarshipPage from "../pages/starships-page";
 import StarshipDetails from "../sw-components/starship-details";
-import PersonDetails from "../sw-components/person-details"
+
+import {SecretPage, LoginPage} from '../pages'
+
 
 
 export default class App extends React.Component {
     swapiService = new SwapiService();
     state = {
-        hasError: false
+        hasError: false,
+        isLoggedIn: false
+    };
+
+    onLogin = () => {
+        this.setState({
+            isLoggedIn: true
+        });
     };
 
 
@@ -33,6 +42,8 @@ export default class App extends React.Component {
         if(this.state.hasError){
             return <ErrorIndicator/>
         }
+        const { isLoggedIn } = this.state;
+
 
         return(
             <ErrorBoundry>
@@ -56,10 +67,21 @@ export default class App extends React.Component {
                                 return <StarshipDetails itemId={id} url={match.url} />
                             }}/>
 
-                            <Route path="/people/more/people/:id" render={({match})=>{
-                                const {id} = match.params;
-                                console.log(match.url);
-                            }}/>
+                            <Route
+                                path="/login"
+                                render={() => (
+                                    <LoginPage
+                                        isLoggedIn={isLoggedIn}
+                                        onLogin={this.onLogin}/>
+                                )}/>
+
+                            <Route
+                                path="/secret"
+                                render={() => (
+                                    <SecretPage isLoggedIn={isLoggedIn} />
+                                )}/>
+
+                            <Route render={() => <h2>Page not found</h2>} />
 
                         </div>
                     </Router>
